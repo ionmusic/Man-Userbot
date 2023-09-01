@@ -60,7 +60,7 @@ async def okgoogle(img):
         "\n**Parsing source now. Maybe.**"
     )
     os.remove(name)
-    match = await ParseSauce(fetchUrl + "&preferences?hl=en&fg=1#languages")
+    match = await ParseSauce(f"{fetchUrl}&preferences?hl=en&fg=1#languages")
     guess = str(match["best_guess"])
     imgspage = match["similar_images"]
     if not guess and not imgspage:
@@ -68,9 +68,9 @@ async def okgoogle(img):
     try:
         counter = int(img.pattern_match.group(1))
     except BaseException:
-        counter = int(3)
-    counter = int(10) if counter > 10 else counter
-    counter = int(3) if counter < 0 else counter
+        counter = 3
+    counter = min(counter, 10)
+    counter = 3 if counter < 0 else counter
     if counter == 0:
         return await xx.edit(
             f"**Best match:** `{guess}`\

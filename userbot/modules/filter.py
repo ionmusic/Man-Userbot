@@ -132,7 +132,7 @@ async def on_snip_list(event):
     for filt in filters:
         if OUT_STR == "**Tidak Ada Filter Apapun Disini.**":
             OUT_STR = "**✥ Daftar Filter Yang Aktif Disini:**\n"
-        OUT_STR += "• `{}`\n".format(filt.keyword)
+        OUT_STR += f"• `{filt.keyword}`\n"
     await edit_or_reply(
         event,
         OUT_STR,
@@ -145,15 +145,14 @@ async def on_snip_list(event):
 async def remove_a_filter(event):
     filt = event.pattern_match.group(1)
     if not remove_filter(event.chat_id, filt):
-        await event.edit("**Filter** `{}` **Tidak Ada Disini**.".format(filt))
+        await event.edit(f"**Filter** `{filt}` **Tidak Ada Disini**.")
     else:
-        await event.edit("**Berhasil Menghapus Filter** `{}` **Disini**".format(filt))
+        await event.edit(f"**Berhasil Menghapus Filter** `{filt}` **Disini**")
 
 
 @bot.on(man_cmd(outgoing=True, pattern="rmallfilters$"))
 async def on_all_snip_delete(event):
-    filters = get_filters(event.chat_id)
-    if filters:
+    if filters := get_filters(event.chat_id):
         remove_all_filters(event.chat_id)
         await edit_delete(
             event, "**Berhasil Menghapus semua filter yang ada dalam obrolan ini**"

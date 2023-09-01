@@ -207,7 +207,7 @@ async def stickerpack_spam(event):
 
 @man_cmd(pattern="cspam ([\s\S]*)")
 async def tmeme(event):
-    cspam = str("".join(event.text.split(maxsplit=1)[1:]))
+    cspam = "".join(event.text.split(maxsplit=1)[1:])
     message = cspam.replace(" ", "")
     await event.delete()
     addgvar("spamwork", True)
@@ -232,7 +232,7 @@ async def tmeme(event):
 
 @man_cmd(pattern="wspam ([\s\S]*)")
 async def tmeme(event):
-    wspam = str("".join(event.text.split(maxsplit=1)[1:]))
+    wspam = "".join(event.text.split(maxsplit=1)[1:])
     message = wspam.split()
     await event.delete()
     addgvar("spamwork", True)

@@ -949,10 +949,8 @@ async def slap(replied_user, event):
     """Construct a funny slap sentence !!"""
     user_id = replied_user.id
     first_name = replied_user.first_name
-    username = replied_user.username
-
-    if username:
-        slapped = "@{}".format(username)
+    if username := replied_user.username:
+        slapped = f"@{username}"
     else:
         slapped = f"[{first_name}](tg://user?id={user_id})"
     slap_str = event.pattern_match.group(1)
@@ -974,9 +972,7 @@ async def slap(replied_user, event):
         hit = choice(HIT_Jutsu)
         throw = choice(THROW_Jutsu)
         where = choice(WHERE_Jutsu)
-    return "..." + temp.format(
-        victim=slapped, item=item, hits=hit, throws=throw, where=where
-    )
+    return f"...{temp.format(victim=slapped, item=item, hits=hit, throws=throw, where=where)}"
 
 
 @bot.on(man_cmd(outgoing=True, pattern=r"tt(?: |$)(.*)"))
@@ -985,7 +981,7 @@ async def _(e):
     await sleep(3)
     await e.edit("`Mengirim Gambar tt...`")
     nsfw = requests.get("http://api.oboobs.ru/noise/1").json()[0]["preview"]
-    urllib.request.urlretrieve("http://media.oboobs.ru/{}".format(nsfw), "*.jpg")
+    urllib.request.urlretrieve(f"http://media.oboobs.ru/{nsfw}", "*.jpg")
     os.rename("*.jpg", "boobs.jpg")
     await e.client.send_file(e.chat_id, "boobs.jpg")
     os.remove("boobs.jpg")
@@ -998,7 +994,7 @@ async def _(e):
     await sleep(3)
     await e.edit("`Mengirim Gambar Pantat Indah...`")
     nsfw = requests.get("http://api.obutts.ru/noise/1").json()[0]["preview"]
-    urllib.request.urlretrieve("http://media.obutts.ru/{}".format(nsfw), "*.jpg")
+    urllib.request.urlretrieve(f"http://media.obutts.ru/{nsfw}", "*.jpg")
     os.rename("*.jpg", "butts.jpg")
     await e.client.send_file(e.chat_id, "butts.jpg")
     os.remove("butts.jpg")
@@ -1023,7 +1019,7 @@ async def _(event):
 async def _(idk):
     t = ";_;"
     for _ in range(10):
-        t = t[:-1] + "_;"
+        t = f"{t[:-1]}_;"
         await idk.edit(t)
 
 
@@ -1176,9 +1172,9 @@ async def _(owo):
     reply_text = sub(r"(R|L)", "W", reply_text)
     reply_text = sub(r"n([aeiou])", r"ny\1", reply_text)
     reply_text = sub(r"N([aeiouAEIOU])", r"Ny\1", reply_text)
-    reply_text = sub(r"\!+", " " + choice(UWUS), reply_text)
+    reply_text = sub(r"\!+", f" {choice(UWUS)}", reply_text)
     reply_text = reply_text.replace("ove", "uv")
-    reply_text += " " + choice(UWUS)
+    reply_text += f" {choice(UWUS)}"
     await owo.edit(reply_text)
 
 
@@ -1216,7 +1212,7 @@ async def _(hahayes):
 async def _(e):
     t = "Oem"
     for _ in range(16):
-        t = t[:-1] + "em"
+        t = f"{t[:-1]}em"
         await e.edit(t)
 
 
@@ -1224,7 +1220,7 @@ async def _(e):
 async def _(e):
     t = "Oem"
     for _ in range(16):
-        t = t[:-1] + "em"
+        t = f"{t[:-1]}em"
         await e.edit(t)
 
 
@@ -1513,28 +1509,14 @@ async def _(bt_e):
 @bot.on(man_cmd(outgoing=True, pattern=r"f (.*)"))
 async def _(event):
     paytext = event.pattern_match.group(1)
-    pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
-        paytext * 8,
-        paytext * 8,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 6,
-        paytext * 6,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-    )
+    pay = f"{paytext * 8}\n{paytext * 8}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 6}\n{paytext * 6}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}"
     await event.edit(pay)
 
 
 @bot.on(man_cmd(outgoing=True, pattern=r"lfy (.*)"))
 async def _(lmgtfy_q):
     textx = await lmgtfy_q.get_reply_message()
-    qry = lmgtfy_q.pattern_match.group(1)
-    if qry:
+    if qry := lmgtfy_q.pattern_match.group(1):
         query = str(qry)
     elif textx:
         query = textx
@@ -1553,7 +1535,7 @@ async def _(sigh):
     """Ok..."""
     okay = "-_-"
     for _ in range(10):
-        okay = okay[:-1] + "_-"
+        okay = f"{okay[:-1]}_-"
         await sigh.edit(okay)
 
 
@@ -1631,8 +1613,8 @@ async def _(typew):
     await typew.edit(typing_symbol)
     await sleep(sleep_time)
     for character in message:
-        old_text = old_text + "" + character
-        typing_text = old_text + "" + typing_symbol
+        old_text = f"{old_text}{character}"
+        typing_text = f"{old_text}{typing_symbol}"
         await typew.edit(typing_text)
         await sleep(sleep_time)
         await typew.edit(old_text)
@@ -1642,20 +1624,7 @@ async def _(typew):
 @bot.on(man_cmd(outgoing=True, pattern=r"f (.*)"))
 async def _(event):
     paytext = event.pattern_match.group(1)
-    pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
-        paytext * 8,
-        paytext * 8,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 6,
-        paytext * 6,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-    )
+    pay = f"{paytext * 8}\n{paytext * 8}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 6}\n{paytext * 6}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}"
     await event.edit(pay)
 
 
@@ -1850,8 +1819,8 @@ async def _(siwis):
 
     reply_text = sub(r"(a|i|u|e|o)", "i", message)
     reply_text = sub(r"(A|I|U|E|O)", "I", reply_text)
-    reply_text = sub(r"\!+", " " + choice(IWIS), reply_text)
-    reply_text += " " + choice(IWIS)
+    reply_text = sub(r"\!+", f" {choice(IWIS)}", reply_text)
+    reply_text += f" {choice(IWIS)}"
     await siwis.edit(reply_text)
 
 
