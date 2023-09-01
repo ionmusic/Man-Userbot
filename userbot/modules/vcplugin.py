@@ -360,9 +360,9 @@ async def vc_skip(event):
                 link_preview=False,
             )
     else:
-        skip = event.text.split(maxsplit=1)[1]
         DELQUE = "**Menghapus Lagu Berikut Dari Antrian:**"
         if chat_id in QUEUE:
+            skip = event.text.split(maxsplit=1)[1]
             items = [int(x) for x in skip.split(" ") if x.isdigit()]
             items.sort(reverse=True)
             for x in items:

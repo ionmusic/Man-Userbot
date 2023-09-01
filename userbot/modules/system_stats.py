@@ -67,8 +67,8 @@ async def psu(event):
     softw += f"`Waktu Hidup: {bt.day}/{bt.month}/{bt.year}  {bt.hour}:{bt.minute}:{bt.second}`\n"
     # CPU Cores
     cpuu = "**Informasi CPU**\n"
-    cpuu += "`Physical cores   : " + str(psutil.cpu_count(logical=False)) + "`\n"
-    cpuu += "`Total cores      : " + str(psutil.cpu_count(logical=True)) + "`\n"
+    cpuu += f"`Physical cores   : {str(psutil.cpu_count(logical=False))}" + "`\n"
+    cpuu += f"`Total cores      : {str(psutil.cpu_count(logical=True))}" + "`\n"
     # CPU frequencies
     cpufreq = psutil.cpu_freq()
     cpuu += f"`Max Frequency    : {cpufreq.max:.2f}Mhz`\n"
@@ -123,7 +123,7 @@ async def sysdetails(sysd):
             stdout, stderr = await fetch.communicate()
             result = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
-            await edit_or_reply(sysd, "`" + result + "`")
+            await edit_or_reply(sysd, f"`{result}`")
         except FileNotFoundError:
             await edit_or_reply(sysd, "**Install neofetch Terlebih dahulu!!**")
 
